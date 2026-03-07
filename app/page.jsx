@@ -4,17 +4,20 @@ import React, { useState } from 'react';
 import { ChevronRight, ChevronLeft, X } from 'lucide-react';
 
 const PhotoGallery = () => {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [touchStartX, setTouchStartX] = useState<number>(0);
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [touchStartX, setTouchStartX] = useState(0);
 
   const [isAnimating, setIsAnimating] = useState(false);
-  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null);
+  const [slideDirection, setSlideDirection] = useState(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const photos = [
     'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=1000',
     'https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=1000',
     'https://images.unsplash.com/photo-1506744626753-eda8141928a4?q=80&w=1000',
+    'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1000',
+    'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1000',
+    'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1000',
     'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1000',
     'https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=1000',
     'https://images.unsplash.com/photo-1501862700950-18382cd41497?q=80&w=1000',
@@ -35,7 +38,7 @@ const PhotoGallery = () => {
     }
   };
 
-  const handleKeydown = (e: KeyboardEvent) => {
+  const handleKeydown = (e) => {
     if (selectedIndex !== null) {
       if (e.key === 'ArrowRight') handleNext();
       if (e.key === 'ArrowLeft') handlePrev();
@@ -43,11 +46,11 @@ const PhotoGallery = () => {
     }
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = (e) => {
     setTouchStartX(e.touches[0].clientX);
   };
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
+  const handleTouchEnd = (e) => {
     const touchEndX = e.changedTouches[0].clientX;
     const diff = touchStartX - touchEndX;
 
@@ -59,7 +62,7 @@ const PhotoGallery = () => {
   };
 
   React.useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e) => {
       setMousePos({ x: e.clientX, y: e.clientY });
     };
 
